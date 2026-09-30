@@ -11,6 +11,8 @@ const platformChoices = [
   { id: "steam", name: "Steam", description: "Launch through Steam.", regular: "Steam.png", selected: "SSteam.png" },
 ];
 
+const downloadAssetRoot = `${import.meta.env.BASE_URL}reference-assets/Icons/Download`;
+
 export default function DownloadPage() {
   const [selected, setSelected] = useState("quest");
   return (
@@ -19,7 +21,7 @@ export default function DownloadPage() {
       <div className="platform-grid" role="group" aria-label="Select a platform">
         {platformChoices.map((platform) => {
           const active = selected === platform.id;
-          return <button className={`platform-card${active ? " is-selected" : ""}`} key={platform.id} aria-pressed={active} onClick={() => setSelected(platform.id)}><span className="platform-icon-frame"><img src={`/reference-assets/Icons/Download/${active ? platform.selected : platform.regular}`} alt="" /></span><span className="platform-card-copy"><strong>{platform.name}</strong><span>{platform.description}</span></span>{active && <Check className="platform-check" size={17} />}</button>;
+          return <button className={`platform-card${active ? " is-selected" : ""}`} key={platform.id} aria-pressed={active} onClick={() => setSelected(platform.id)}><span className="platform-icon-frame"><img src={`${downloadAssetRoot}/${active ? platform.selected : platform.regular}`} alt="" /></span><span className="platform-card-copy"><strong>{platform.name}</strong><span>{platform.description}</span></span>{active && <Check className="platform-check" size={17} />}</button>;
         })}
       </div>
       <section className="platform-detail"><div><p className="eyebrow">Selected platform</p><h2>{platformChoices.find((item) => item.id === selected)?.name}</h2><p>{platformChoices.find((item) => item.id === selected)?.description} Room destinations can be added here when the platform links are ready.</p></div><button className="button button-light" onClick={() => toast("The official platform link will appear here once it is confirmed.")}>Platform information <ArrowRight size={15} /></button></section>

@@ -11,6 +11,7 @@ import { useApiResource } from "@/lib/useApiResource";
 import { useStoredIds } from "@/lib/useStoredIds";
 
 const loadRooms = () => communityApi.listRooms();
+const fallbackCover = `${import.meta.env.BASE_URL}reference-assets/Icons/Create.jpg`;
 
 export default function PersonDetailPage() {
   const [, params] = useRoute("/people/:id");
@@ -36,7 +37,7 @@ export default function PersonDetailPage() {
     <div className="page-container inner-page">
       <Link href="/people" className="back-link"><ArrowLeft size={15} />All people</Link>
       <article className="profile-card">
-        <div className="profile-cover"><img src={created[0]?.artwork ?? "/reference-assets/Icons/Create.jpg"} alt="" /></div>
+        <div className="profile-cover"><img src={created[0]?.artwork ?? fallbackCover} alt="" /></div>
         <div className="profile-body">
           <div className="profile-avatar"><img src={account.avatar} alt={`${account.displayName}'s avatar`} /></div>
           <div className="profile-main-row"><div><p className="eyebrow">Community creator</p><h1>{account.displayName}</h1><p className="profile-handle">@{account.username}</p></div><div className="profile-action"><PresenceLabel account={account} /><button className={`button${following.has(account.id) ? " button-following" : " button-light"}`} aria-pressed={following.has(account.id)} onClick={toggleFollow}>{following.has(account.id) ? "Following" : "Follow creator"}</button></div></div>

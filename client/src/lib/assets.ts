@@ -1,4 +1,4 @@
-const root = "/reference-assets/Icons";
+const root = `${import.meta.env.BASE_URL}reference-assets/Icons`;
 
 export const siteAssets = {
   logo: `${root}/default.png`,
